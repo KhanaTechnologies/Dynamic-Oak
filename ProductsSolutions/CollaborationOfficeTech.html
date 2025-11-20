@@ -168,7 +168,13 @@
               </div>
               
               <div class="contact-form">
-                <form id="contactForm">
+                <form id="contactForm" action="https://formsubmit.co/dynamicoakltd@gmail.com" method="POST">
+                  <!-- Hidden FormSubmit Fields -->
+                  <input type="hidden" name="_subject" value="New Collaboration Technology Inquiry - Dynamic Oak">
+                  <input type="hidden" name="_template" value="table">
+                  <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_next" value="#success">
+                  
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="name" class="form-label">Full Name *</label>
@@ -256,38 +262,22 @@
     
     <script>
       document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent actual form submission
-        
         const submitBtn = document.getElementById('submitBtn');
         const loadingSpinner = document.getElementById('loadingSpinner');
-        const successMessage = document.getElementById('successMessage');
-        const form = document.getElementById('contactForm');
         
         // Show loading spinner
         submitBtn.style.display = 'none';
         loadingSpinner.style.display = 'block';
         
-        // Simulate form processing delay (2-3 seconds)
-        setTimeout(function() {
-          // Hide loading spinner
-          loadingSpinner.style.display = 'none';
-          
-          // Show success message
-          successMessage.style.display = 'block';
-          
-          // Reset form
-          form.reset();
-          
-          // Scroll to success message
-          successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          
-          // Show submit button again after 5 seconds
-          setTimeout(function() {
-            submitBtn.style.display = 'block';
-          }, 5000);
-          
-        }, 2500); // 2.5 second delay to simulate processing
+        // Form will submit normally to FormSubmit
+        // This just provides visual feedback
       });
+      
+      // Check if we came back from a successful FormSubmit submission
+      if (window.location.hash === '#success') {
+        document.getElementById('successMessage').style.display = 'block';
+        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+      }
     </script>
   </body>
 </html>
